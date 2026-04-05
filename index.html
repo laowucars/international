@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LAO WU CHINA USED CARS - modern international used car marketplace with direct image listings from Lao Wu China inventory." />
+  <meta name="theme-color" content="#c1272d" />
+  <title>LAO WU CHINA USED CARS</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=2" />
+</head>
+<body data-page="home">
+  <header class="sticky-header">
+    <div class="container site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">LW</span>
+        <span class="brand-name"><strong>LAO WU CHINA</strong><span>Used Cars International</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#search">Search</a>
+        <a href="about.html">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="open-login">Sign in</button>
+        <div id="signed-in-area" class="signed-in-area" aria-live="polite">
+          <span class="user-name"></span>
+          <button id="logout-btn" class="btn-secondary">Logout</button>
+        </div>
+      </div>
+      <button class="hamburger" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p style="color:#ffb0b0; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem;">International used cars from China</p>
+          <h1>Find your dream vehicle with fast export-ready sourcing.</h1>
+          <p>LAO WU CHINA USED CARS presents modern, fully detailed listings built directly from the existing inventory image folders. Browse, compare, and contact the seller with confidence.</p>
+          <div class="hero-buttons">
+            <a class="btn" href="#search">Search cars</a>
+            <a class="btn-secondary" href="compare.html">Compare now</a>
+          </div>
+          <div class="stat-grid" style="margin-top:2.25rem;">
+            <div class="stat-card"><strong>10+</strong> Listed vehicles</div>
+            <div class="stat-card"><strong>Direct image</strong> folder sourcing</div>
+            <div class="stat-card"><strong>PWA ready</strong> offline support</div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-mini-grid" id="hero-mini-grid" aria-label="Business listings slideshow">
+            <article class="hero-mini-card" aria-label="Welcome global partners">
+              <div class="mini-slider"></div>
+              <div class="hero-card-body">
+                <h3>Welcome global partners</h3>
+                <p>Experience premium international sourcing, trust, and export-ready inventory.</p>
+              </div>
+            </article>
+            <article class="hero-mini-card" aria-label="Business-ready mobility">
+              <div class="mini-slider"></div>
+              <div class="hero-card-body">
+                <h3>Business-ready mobility</h3>
+                <p>Secure fleet-grade vehicles with transparent pricing, clear inspection, and global delivery.</p>
+              </div>
+            </article>
+            <article class="hero-mini-card" aria-label="Trusted export supply">
+              <div class="mini-slider"></div>
+              <div class="hero-card-body">
+                <h3>Trusted export supply</h3>
+                <p>Connect with a global vehicle partner providing seamless sourcing and professional support.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" id="categories">
+      <div class="section-title">
+        <div>
+          <h2>Browse categories</h2>
+          <p>Quickly filter by the most popular segments and view direct listings from each category.</p>
+        </div>
+      </div>
+      <div class="category-list" id="category-chips-quick"></div>
+    </section>
+
+    <section class="page-section" id="search">
+      <div class="section-title">
+        <div>
+          <h2>Search and filter</h2>
+          <p>Find the right car by keyword, year, or category. The grid updates instantly with every filter change.</p>
+        </div>
+      </div>
+      <div class="grid-filters">
+        <div class="filter-panel">
+          <label>Search<span><input id="search-query" type="search" placeholder="Toyota RAV4 2014" aria-label="Search cars" /></span></label>
+        </div>
+        <div class="filter-panel">
+          <label>Year<span><select id="filter-year"><option>All</option><option>2010</option><option>2011</option><option>2013</option><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2021</option></select></span></label>
+        </div>
+      </div>
+      <div class="category-list" id="category-chips"></div>
+      <p id="results-count" style="margin-top:1rem; color:var(--muted);">Loading cars...</p>
+      <div class="car-grid" id="car-grid"></div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Featured vehicles</h2>
+          <p>Top selection from our current exportable inventory, ready for international shipping.</p>
+        </div>
+      </div>
+      <div class="featured-carousel" id="featured-cards"></div>
+    </section>
+
+    <section class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Why choose LAO WU</h2>
+          <p>Every car detail page includes specs, history notes, and a ready-to-use contact action so buyers can get answers fast.</p>
+        </div>
+      </div>
+      <div class="testimonials">
+        <article class="testimonial-card"><div class="testimonial-card-body"><p>"The site made it easy to compare models, and the direct image gallery gave me confidence in the condition."</p><strong>� Global buyer</strong></div></article>
+        <article class="testimonial-card"><div class="testimonial-card-body"><p>"I love the modern layout and the ability to save favorites while browsing a wide selection of export-ready cars."</p><strong>� International customer</strong></div></article>
+      </div>
+    </section>
+
+    <section class="page-section" id="contact">
+      <div class="section-title">
+        <div>
+          <h2>Contact the seller</h2>
+          <p>Ready to make an inquiry? Reach us using email, WhatsApp, or the built-in sign-in experience.</p>
+        </div>
+      </div>
+      <div class="dark-panel" style="display:grid; gap:1rem;">
+        <p><strong>Email:</strong> sales@laowuchinausedcars.com</p>
+        <p><strong>WhatsApp:</strong> +86 138 0013 8000</p>
+        <p><strong>Support:</strong> International export guidance, documentation, and direct image verification are available for every listing.</p>
+        <a class="btn contact-action" href="mailto:sales@laowuchinausedcars.com">Send email inquiry</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <strong>LAO WU CHINA USED CARS</strong>
+        <p>All listings load directly from the `Lao Wu china images` folder with a responsive modern design.</p>
+      </div>
+      <div>
+        <h4>Useful links</h4>
+        <a href="#categories">Categories</a><br />
+        <a href="compare.html">Compare</a><br />
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="robots.txt">Robots</a><br />
+        <a href="sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem; color:var(--muted);">� 2026 LAO WU CHINA USED CARS</p>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite">
+    <p>We use cookies to improve site experience and store your preferences. By continuing, you accept our cookie policy.</p>
+    <button class="btn">Accept cookies</button>
+  </div>
+
+  <div id="auth-modal" class="auth-modal" aria-hidden="true">
+    <div class="auth-dialog" role="dialog" aria-modal="true">
+      <button id="close-auth" class="close-button" aria-label="Close login dialog">�</button>
+      <div class="auth-switch">
+        <button type="button" data-mode="login" class="auth-tab active">Sign in</button>
+        <button type="button" data-mode="signup" class="auth-tab">Sign up</button>
+      </div>
+      <h3 id="auth-title">Sign in to your account</h3>
+      <form id="auth-form">
+        <label>Email<input type="email" name="email" required placeholder="name@example.com" /></label>
+        <label>Password<input type="password" name="password" required placeholder="********" /></label>
+        <label id="confirm-password-label" style="display:none;">Confirm password<input type="password" name="confirmPassword" placeholder="Repeat password" /></label>
+        <button type="submit" class="btn" id="auth-submit">Continue</button>
+        <p id="auth-status" style="color:#ddd; margin-top:0.75rem; font-size:0.95rem;"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="assets/js/app.js?v=2"></script>
+  <script src="assets/js/auth.js?v=2"></script>
+</body>
+</html>

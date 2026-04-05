@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Compare selected cars side-by-side at LAO WU CHINA USED CARS." />
+  <title>Compare Cars | LAO WU CHINA USED CARS</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="compare">
+  <header class="sticky-header">
+    <div class="container site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">LW</span>
+        <span class="brand-name"><strong>LAO WU CHINA</strong><span>Used Cars International</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">Categories</a>
+        <a href="index.html#search">Search</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="open-login">Sign in</button>
+        <div id="signed-in-area" class="signed-in-area" aria-live="polite">
+          <span class="user-name"></span>
+          <button id="logout-btn" class="btn-secondary">Logout</button>
+        </div>
+      </div>
+      <button class="hamburger" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </header>
+
+  <main class="container page-section">
+    <div class="section-title">
+      <div>
+        <h2>Compare Cars</h2>
+        <p>Select up to 3 vehicles from the home page and review important specs side-by-side before contacting the seller.</p>
+      </div>
+    </div>
+    <div id="compare-area" class="dark-panel">
+      <p>Loading compare list...</p>
+    </div>
+  </main>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <strong>LAO WU CHINA USED CARS</strong>
+        <p>Compare chosen vehicles and make smarter international buying decisions.</p>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <p>Email: sales@laowuchinausedcars.com</p>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <a href="index.html">Home</a><br />
+        <a href="about.html">About</a><br />
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem; color:var(--muted);">© 2026 LAO WU CHINA USED CARS</p>
+  </footer>
+
+  <div id="auth-modal" class="auth-modal" aria-hidden="true">
+    <div class="auth-dialog" role="dialog" aria-modal="true">
+      <button id="close-auth" class="close-button" aria-label="Close login dialog">×</button>
+      <div class="auth-switch">
+        <button type="button" data-mode="login" class="auth-tab active">Sign in</button>
+        <button type="button" data-mode="signup" class="auth-tab">Sign up</button>
+      </div>
+      <h3 id="auth-title">Sign in to your account</h3>
+      <form id="auth-form">
+        <label>Email<input type="email" name="email" required placeholder="name@example.com" /></label>
+        <label>Password<input type="password" name="password" required placeholder="********" /></label>
+        <label id="confirm-password-label" style="display:none;">Confirm password<input type="password" name="confirmPassword" placeholder="Repeat password" /></label>
+        <button type="submit" class="btn" id="auth-submit">Continue</button>
+        <p id="auth-status" style="color:#ddd; margin-top:0.75rem; font-size:0.95rem;"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
