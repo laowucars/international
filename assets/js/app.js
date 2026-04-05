@@ -1,7 +1,7 @@
 const STORAGE_FAVORITES = 'laowu_favorites';
 const STORAGE_COMPARE = 'laowu_compare';
 const STORAGE_COOKIE_ACCEPT = 'laowu_cookie_accept';
-const BASE_IMAGE_FOLDER = 'Lao Wu china images';
+const BASE_IMAGE_FOLDER = 'LaoWuChinaImages';
 const FILTER_FIELDS = ['year', 'make', 'model', 'location'];
 
 function encodePathSegment(value) {
