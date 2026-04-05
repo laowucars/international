@@ -1,4 +1,4 @@
-const CACHE_NAME = 'laowu-cache-v2';
+const CACHE_NAME = 'laowu-cache-v3';
 const CACHE_ASSETS = [
   '.',
   'index.html',
@@ -6,8 +6,11 @@ const CACHE_ASSETS = [
   'compare.html',
   'car.html',
   'assets/css/styles.css',
+  'assets/css/styles.css?v=3',
   'assets/js/app.js',
+  'assets/js/app.js?v=3',
   'assets/js/auth.js',
+  'assets/js/auth.js?v=3',
   'manifest.webmanifest',
   'robots.txt',
   'sitemap.xml',
@@ -31,7 +34,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
-  if (url.origin === self.location.origin && url.pathname === '/') {
+  const requestPath = url.pathname;
+  const isRootRequest = url.origin === self.location.origin && (requestPath === '/' || requestPath.endsWith('/index.html') || requestPath.endsWith('/international/') );
+  if (isRootRequest) {
     event.respondWith(
       fetch(event.request).then((response) => {
         return caches.open(CACHE_NAME).then((cache) => {

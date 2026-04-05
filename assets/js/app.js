@@ -5,7 +5,7 @@ const BASE_IMAGE_FOLDER = 'Lao Wu china images';
 const FILTER_FIELDS = ['year', 'make', 'model', 'location'];
 
 function encodePathSegment(value) {
-  return encodeURIComponent(value).replace(/%20/g, '%20');
+  return encodeURIComponent(value).replace(/%20/g, '%20').replace(/\./g, '%2E');
 }
 
 function buildImageUrl(folder, image) {
