@@ -9,7 +9,7 @@ function encodePathSegment(value) {
 }
 
 function buildImageUrl(folder, image) {
-  return `${BASE_IMAGE_FOLDER}/${encodePathSegment(folder)}/${encodePathSegment(image)}`;
+  return `${encodePathSegment(BASE_IMAGE_FOLDER)}/${encodePathSegment(folder)}/${encodePathSegment(image)}`;
 }
 
 function getStorageArray(key) {
