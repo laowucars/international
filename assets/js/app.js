@@ -24,23 +24,53 @@ function setStorageArray(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+function closeMobileNav() {
+  const nav = document.querySelector('.site-nav');
+  const button = document.querySelector('.hamburger');
+  nav?.classList.remove('open');
+  button?.classList.remove('open');
+}
+
 function toggleMenu() {
   const nav = document.querySelector('.site-nav');
   const button = document.querySelector('.hamburger');
   if (!nav || !button) return;
-  button.addEventListener('click', () => {
+  const toggle = () => {
     nav.classList.toggle('open');
     button.classList.toggle('open');
+  };
+  button.addEventListener('click', (event) => {
+    event.stopPropagation();
+    toggle();
+  });
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !button.contains(e.target)) {
+      closeMobileNav();
+    }
   });
 }
 
 function initNav() {
   const links = document.querySelectorAll('.site-nav a');
+  const nav = document.querySelector('.site-nav');
+  const button = document.querySelector('.hamburger');
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+
   links.forEach((link) => {
-    if (link.hash && window.location.pathname.endsWith('index.html')) {
-      link.addEventListener('click', () => document.querySelector(link.hash)?.scrollIntoView({ behavior: 'smooth' }));
-    }
-    if (link.href === window.location.href || link.href === window.location.href.replace(window.location.origin, '')) {
+    const href = link.getAttribute('href') || '';
+    const samePageHash = href.startsWith('#') || (link.hash && link.pathname.replace(/\/$/, '') === currentPath);
+
+    link.addEventListener('click', (e) => {
+      if (samePageHash && link.hash) {
+        e.preventDefault();
+        document.querySelector(link.hash)?.scrollIntoView({ behavior: 'smooth' });
+      }
+      closeMobileNav();
+    });
+
+    const normalizedHref = link.href.replace(window.location.origin, '');
+    const normalizedLocation = window.location.href.replace(window.location.origin, '');
+    if (normalizedHref === normalizedLocation || normalizedHref === window.location.pathname || normalizedHref === `${window.location.pathname.replace(/\/$/, '')}/index.html`) {
       link.classList.add('active');
     }
   });
@@ -98,6 +128,11 @@ function buildCategoryChips(listings) {
       container.querySelectorAll('.category-chip').forEach((item) => item.classList.remove('active'));
       chip.classList.add('active');
       applyFilters(listings);
+      // Close menu on mobile
+      const nav = document.querySelector('.site-nav');
+      const button = document.querySelector('.hamburger');
+      nav?.classList.remove('open');
+      button?.classList.remove('open');
     });
   });
   container.querySelector('.category-chip')?.classList.add('active');
@@ -279,12 +314,25 @@ const heroGrid = document.getElementById('hero-mini-grid');
           target?.classList.add('active');
           button.classList.add('active');
           applyFilters(listings);
+          closeMobileNav();
         });
       });
     }
 
-    document.getElementById('search-query')?.addEventListener('input', () => applyFilters(listings));
-    document.getElementById('filter-year')?.addEventListener('change', () => applyFilters(listings));
+    document.getElementById('search-query')?.addEventListener('input', () => {
+      applyFilters(listings);
+      closeMobileNav();
+    });
+    document.getElementById('search-query')?.addEventListener('click', () => {
+      closeMobileNav();
+    });
+    document.getElementById('filter-year')?.addEventListener('change', () => {
+      applyFilters(listings);
+      closeMobileNav();
+    });
+    document.getElementById('filter-year')?.addEventListener('click', () => {
+      closeMobileNav();
+    });
     updateCards(listings);
   });
 }
@@ -322,19 +370,43 @@ function initCarDetail() {
     }
     const gallery = document.getElementById('detail-gallery');
     if (gallery) {
-      gallery.innerHTML = car.images.map((image, index) => `
-        <div class="gallery-slide ${index === 0 ? 'active' : ''}">
-          <img src="${buildImageUrl(car.folder, image)}" alt="${car.title} image ${index + 1}" loading="lazy" />
+      gallery.innerHTML = `
+        <div class="gallery-main">
+          ${car.images.map((image, index) => `
+            <div class="gallery-slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+              <img src="${buildImageUrl(car.folder, image)}" alt="${car.title} image ${index + 1}" loading="lazy" />
+            </div>
+          `).join('')}
         </div>
-      `).join('');
+        <div class="gallery-thumbs">
+          ${car.images.map((image, index) => `
+            <button type="button" class="gallery-thumb ${index === 0 ? 'active' : ''}" data-index="${index}">
+              <img src="${buildImageUrl(car.folder, image)}" alt="${car.title} thumbnail ${index + 1}" loading="lazy" />
+            </button>
+          `).join('')}
+        </div>
+      `;
       initGalleryAutoplay(gallery);
+      gallery.querySelectorAll('.gallery-thumb').forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const selectedIndex = Number(thumb.dataset.index);
+          setActiveGalleryIndex(gallery, selectedIndex);
+        });
+      });
     }
     document.querySelectorAll('.contact-cta').forEach((button) => {
       const subject = encodeURIComponent(`Inquiry about ${car.title}`);
-      button.href = `mailto:sales@laowuchinausedcars.com?subject=${subject}`;
+      button.href = `mailto:laowucardealers@gmail.com?subject=${subject}`;
     });
     document.getElementById('contact-whatsapp')?.setAttribute('href', `https://wa.me/8613800138000?text=${encodeURIComponent('Hello, I want to ask about ' + car.title)}`);
   });
+}
+
+function setActiveGalleryIndex(container, index) {
+  const slides = container.querySelectorAll('.gallery-slide');
+  const thumbs = container.querySelectorAll('.gallery-thumb');
+  slides.forEach((slide, idx) => slide.classList.toggle('active', idx === index));
+  thumbs.forEach((thumb, idx) => thumb.classList.toggle('active', idx === index));
 }
 
 function initGalleryAutoplay(container) {
@@ -342,9 +414,8 @@ function initGalleryAutoplay(container) {
   let active = 0;
   if (!slides.length) return;
   setInterval(() => {
-    slides[active].classList.remove('active');
     active = (active + 1) % slides.length;
-    slides[active].classList.add('active');
+    setActiveGalleryIndex(container, active);
   }, 4000);
 }
 
